@@ -1,0 +1,430 @@
+@startuml
+
+/' diagram meta data start
+config=StructureConfiguration;
+{
+  "projectClassification": {
+    "searchMode": "OpenProject", // OpenProject, AllProjects
+    "includedProjects": "",
+    "pathEndKeywords": "*.impl",
+    "isClientPath": "",
+    "isClientName": "",
+    "isTestPath": "",
+    "isTestName": "",
+    "isMappingPath": "",
+    "isMappingName": "",
+    "isDataAccessPath": "",
+    "isDataAccessName": "",
+    "isDataStructurePath": "",
+    "isDataStructureName": "",
+    "isInterfaceStructuresPath": "",
+    "isInterfaceStructuresName": "",
+    "isEntryPointPath": "",
+    "isEntryPointName": "",
+    "treatFinalFieldsAsMandatory": false
+  },
+  "graphRestriction": {
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "removeByInheritance": "", // inheritance/annotation based filtering is done in a second step
+    "removeByAnnotation": "",
+    "removeByClassPackage": "", // cleanup the graph after inheritance/annotation based filtering is done
+    "removeByClassName": "",
+    "cutMappings": false,
+    "cutEnum": true,
+    "cutTests": true,
+    "cutClient": true,
+    "cutDataAccess": true,
+    "cutInterfaceStructures": true,
+    "cutDataStructures": true,
+    "cutGetterAndSetter": true,
+    "cutConstructors": true
+  },
+  "graphTraversal": {
+    "forwardDepth": 3,
+    "backwardDepth": 3,
+    "classPackageExcludeFilter": "",
+    "classPackageIncludeFilter": "",
+    "classNameExcludeFilter": "",
+    "classNameIncludeFilter": "",
+    "methodNameExcludeFilter": "",
+    "methodNameIncludeFilter": "",
+    "hideMappings": false,
+    "hideDataStructures": false,
+    "hidePrivateMethods": true,
+    "hideInterfaceCalls": true, // indirection: implementation -> interface (is hidden) -> implementation
+    "onlyShowApplicationEntryPoints": false, // root node is included
+    "useMethodCallsForStructureDiagram": "ForwardOnly" // ForwardOnly, BothDirections, No
+  },
+  "details": {
+    "aggregation": "GroupByClass", // ByClass, GroupByClass, None
+    "showClassGenericTypes": true,
+    "showMethods": true,
+    "showMethodParameterNames": true,
+    "showMethodParameterTypes": true,
+    "showMethodReturnType": true,
+    "showPackageLevels": 2,
+    "showDetailedClassStructure": true
+  },
+  "rootClass": "Main",
+  "extensionCallbackMethod": "" // qualified.class.name#methodName - signature: public static String method(String)
+}
+diagram meta data end '/
+
+
+
+digraph g {
+    rankdir="TB"
+    splines=polyline
+    
+
+'nodes 
+subgraph cluster_166208699 { 
+   	label=library
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Library166208699[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Library</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   books: HashMap&lt;Book, LocalDate&gt; [0..*]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   libraryID: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   libraryName: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   libraryRepository: LibraryRepository [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addBookToLibrary(bookName: String, isRead: boolean)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_1950800714 { 
+   	label=repository
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   UserRepository1142247757[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)UserRepository</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   connection: Connection [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ encryptPassword(password: String): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getUserLibrary(userID: int): Library</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getUserLibraryID(userID: int): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getUserLibraryListSortedBy(userID: int, sortBy: String): ArrayList&lt;Book&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ isLocked(userID: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ userExistsInGeneralDB(userID: int): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_2390489 { 
+   	label=Main
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Main2390489[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Main</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ main(args: String[])</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_3029737 { 
+   	label=book
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Book3029737[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Book</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   ISBN: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   access: BookAccess [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   author: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   bookID: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   bookRepository: IBookRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   genre: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   isRead: boolean [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   language: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   rating: double [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   title: String [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ bookExistsInLibrary(libraryID: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >- convertAccess(access: BookAccess): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getCountFromLibraries(libraryID: int): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ toStringAuthor(): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ toStringReader(): String</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+BookRepository3029737[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)BookRepository</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   connection: Connection [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addRatingToUserRatingTable(bookID: int, userID: int, rating: double): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ authorExistsInGeneralLibrary(authorName: String): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ bookExistsInGeneralLibrary(bookName: String): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ bookExistsInLibrary(libraryID: int, bookID: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getAccessByBookID(bookID: int): BookAccess</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getAuthor(authorID: int): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getAuthorByBookID(bookID: int): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getAuthorId(authorName: String): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getAverageRatingFromDB(bookID: int): double</TD></TR>
+<TR><TD ALIGN="LEFT" >- getBookAccess(access: int): BookAccess</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getBookAccessByID(access: BookAccess): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getBookByID(bookID: int): Book</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getBookCountFromAllLibraries(libraryID: int, bookID: int): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getBookIDbyName(bookName: String): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getBookNameByBookID(bookID: int): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getGenre(genreID: int): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getGenreByBookID(bookID: int): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getGenreID(genre: String): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getISBNByBookID(bookID: int): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getLanguage(languageID: int): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getLanguageByBookID(bookID: int): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getLanguageID(language: String): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getRatingByBookID(bookID: int): Double</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getTheBookAccess(access: int): BookAccess</TD></TR>
+<TR><TD ALIGN="LEFT" >+ rateBook(bookID: int, userID: int, rating: double)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ ratingExistsInUserRating(bookID: int, userID: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ searchBookByAuthor(authorName: String): ArrayList&lt;Book&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ searchBookByName(bookName: String): ArrayList&lt;Book&gt;</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_3347807 { 
+   	label=menu
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   Menu637609878[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)Menu</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- capitalLetter(str: String): String</TD></TR>
+<TR><TD ALIGN="LEFT" >- convertCharArrayToString(pass: char[]): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ createAccount(scanner: Scanner): User</TD></TR>
+<TR><TD ALIGN="LEFT" >- getChoice(scan: Scanner): int</TD></TR>
+<TR><TD ALIGN="LEFT" >- initializeName(scanner: Scanner, str: String): String</TD></TR>
+<TR><TD ALIGN="LEFT" >- initializePassword(scanner: Scanner): String</TD></TR>
+<TR><TD ALIGN="LEFT" >- isValidName(name: String): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >- isValidPassword(password: String): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ logInMenu()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printAccessOptions()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printAddBookDetailsFooter()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printAddBookDetailsHeader()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printAdminMenu()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printAdminUserFooter()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printAdminUserHeader()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printAuthorLibraryFooter()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printAuthorLibraryHeader()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printAuthorMenu()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printLogInFooter()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printLogInHeader()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printReaderLastRead()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printReaderLibraryFooter()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printReaderLibraryHeader()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printReaderMenu()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printReaderSearchBookMenu()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printReaderSortLibraryMenu()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printSortedBy(sortedBy: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ readCredentials(): User</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_3599307 { 
+   	label=user
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   User3599307[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)User</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   email: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   firstName: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   lastName: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   password: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   phoneNumber: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   role: Role [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   userID: int [1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   userName: String [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   userRepository: IUserRepository [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ checkCredentials(userName: String, pass: String): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getLibraryIDFromDB(LibraryName: String): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getPasswordFromDB(userID: int): String</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getRole(roleID: int): Role</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getRoleFromDB(userID: int): Role</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getUserFromDB(userName: String, encPassword: String): User</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getUserFromDBByUserID(userID: int): User</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getUserIDFromDB(userName: String): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getUserIDFromDB(user: User): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ getUserNameFromDB(userID: int): String</TD></TR>
+<TR><TD ALIGN="LEFT" >- getUserRole(role: Role): int</TD></TR>
+<TR><TD ALIGN="LEFT" >+ insertCredentials()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ insertIntoAuthor()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ insertIntoLibrary(libraryName: String)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ insertIntoUserRole()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ insertUser()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ insertUserLibrary(userID: int, libraryID: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printUserData()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ userExistsInGeneralDB(): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+UserAdmin3599307[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)UserAdmin</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- lock(userID: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ lockAccount(userID: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ printUserDetails(userID: int)</TD></TR>
+<TR><TD ALIGN="LEFT" >- unlock(userID: int): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ unlockAccount(userID: int): boolean</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+UserAuthor3599307[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)UserAuthor</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   bookRepository: IBookRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   library: Library [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ showMyLibrary()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ uploadBook(book: Book)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+
+UserReader3599307[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)UserReader</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >-   bookRepository: IBookRepository [0..1]</TD></TR>
+<TR><TD ALIGN="LEFT" >-   library: Library [0..1]</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >+ addToLibrary(bookName: String, isRead: boolean): boolean</TD></TR>
+<TR><TD ALIGN="LEFT" >+ rateBook(bookID: int, rating: double)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ searchBookByAuthor(authorName: String): ArrayList&lt;Book&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ searchBookByName(bookName: String): ArrayList&lt;Book&gt;</TD></TR>
+<TR><TD ALIGN="LEFT" >+ showLastRead()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ sortLibraryByAuthor()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ sortLibraryByGenre()</TD></TR>
+<TR><TD ALIGN="LEFT" >+ sortLibraryByTitle()</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+subgraph cluster_951510359 { 
+   	label=console
+	labeljust=l
+	fillcolor="#ececec"
+	style=filled
+   
+   ConsoleInteraction951510359[
+	label=<<TABLE BORDER="1" CELLBORDER="0" CELLPADDING="4" CELLSPACING="0">
+<TR><TD ALIGN="LEFT" >(C)ConsoleInteraction</TD></TR>
+<HR/>
+<TR><TD ALIGN="LEFT" >- ReaderAddBook(reader: UserReader, scan: Scanner)</TD></TR>
+<TR><TD ALIGN="LEFT" >- ReaderSearchBook(reader: UserReader, scan: Scanner, menu: Menu)</TD></TR>
+<TR><TD ALIGN="LEFT" >- ReaderSortLibrary(reader: UserReader, scan: Scanner, menu: Menu)</TD></TR>
+<TR><TD ALIGN="LEFT" >- getAccess(scan: Scanner): BookAccess</TD></TR>
+<TR><TD ALIGN="LEFT" >- getAuthorName(scan: Scanner): String</TD></TR>
+<TR><TD ALIGN="LEFT" >- getBookDetails(scan: Scanner, menu: Menu): Book</TD></TR>
+<TR><TD ALIGN="LEFT" >- getBookID(scan: Scanner, menu: Menu): int</TD></TR>
+<TR><TD ALIGN="LEFT" >- getBookName(scan: Scanner): String</TD></TR>
+<TR><TD ALIGN="LEFT" >- getChoice(scan: Scanner): int</TD></TR>
+<TR><TD ALIGN="LEFT" >- getRating(scan: Scanner, menu: Menu): double</TD></TR>
+<TR><TD ALIGN="LEFT" >- getUserID(scan: Scanner): int</TD></TR>
+<TR><TD ALIGN="LEFT" >- handleGenre(scan: Scanner): String</TD></TR>
+<TR><TD ALIGN="LEFT" >- handleLanguage(scan: Scanner): String</TD></TR>
+<TR><TD ALIGN="LEFT" >- interactWithAdmin(admin: UserAdmin, scan: Scanner, menu: Menu)</TD></TR>
+<TR><TD ALIGN="LEFT" >- interactWithAuthor(author: UserAuthor, scan: Scanner, menu: Menu)</TD></TR>
+<TR><TD ALIGN="LEFT" >- interactWithReader(reader: UserReader, scan: Scanner, menu: Menu)</TD></TR>
+<TR><TD ALIGN="LEFT" >- lockAccount(admin: UserAdmin, userID: int, scan: Scanner)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ logIn(scan: Scanner, menu: Menu): User</TD></TR>
+<TR><TD ALIGN="LEFT" >- printBooks(books: ArrayList&lt;Book&gt;)</TD></TR>
+<TR><TD ALIGN="LEFT" >+ start(scan: Scanner)</TD></TR>
+<TR><TD ALIGN="LEFT" >- unlockAccount(admin: UserAdmin, userID: int, scan: Scanner)</TD></TR>
+<TR><TD ALIGN="LEFT" >- updateBookAccess(author: UserAuthor, scan: Scanner, menu: Menu)</TD></TR>
+</TABLE>>
+	style=filled
+	margin=0
+	shape=plaintext
+	fillcolor="#FFFFFF"
+];
+} 
+
+'edges    
+Book3029737 -> BookRepository3029737[arrowhead=none];
+Main2390489 -> ConsoleInteraction951510359[label="main() -> start()"];
+User3599307 -> UserAdmin3599307[arrowhead=none, arrowtail=empty, dir=both];
+User3599307 -> UserAuthor3599307[arrowhead=none, arrowtail=empty, dir=both];
+User3599307 -> UserReader3599307[arrowhead=none, arrowtail=empty, dir=both];
+UserAuthor3599307 -> Library166208699[label="library
+[0..1]"];
+UserReader3599307 -> Library166208699[label="library
+[0..1]"];
+UserReader3599307 -> UserRepository1142247757[arrowhead=none];
+    
+}
+@enduml
